@@ -27,6 +27,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.mariuszgromada.math</groupId>
+			<artifactId>MathParser.org-mXparser</artifactId>
+			<version>5.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
