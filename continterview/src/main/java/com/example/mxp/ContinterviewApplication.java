@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import domain.iface.IBinaryTree;
 import domain.impl.BinaryTree;
 import domain.impl.Node;
+import util.parser.impl.*;
 
 @SpringBootApplication
 public class ContinterviewApplication {
@@ -73,6 +74,8 @@ public class ContinterviewApplication {
         tree2.postOrderTraversal(); 
         System.out.println("\nReverse Order:");
         tree2.reverseOrderTraversal(tree2.getRoot());
+        
+        ArithMediator am = new ArithMediator(tree2.getRoot());
 	}
 
 }

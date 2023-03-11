@@ -6,18 +6,16 @@ import util.parser.iface.IArithMediator;
 
 record ArithMediator(INode node) implements IArithMediator {
 	public int calculateNode(INode _node) {
-		// TODO Auto-generated method stub
 		switch(ArithOperator.valueOf(_node.getValue())) {
-		case PLUS : return plusInt(_node);
-		default : return 0;
+			case PLUS -> plusInt(_node);
+			case MULTIPLY, MULTIPLICATION -> multiplyInt(_node);
 		}
+		return 0;
 	}
 	public boolean checkDone(INode _node) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	public INode forwardCalculation(INode _node) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	public int plusInt(INode _node) {
