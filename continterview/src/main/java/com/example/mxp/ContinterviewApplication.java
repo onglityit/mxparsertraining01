@@ -4,8 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import domain.iface.IBinaryTree;
+import domain.iface.INode;
 import domain.impl.BinaryTree;
 import domain.impl.Node;
+import util.parser.iface.*;
 import util.parser.impl.*;
 
 @SpringBootApplication
@@ -75,7 +77,15 @@ public class ContinterviewApplication {
         System.out.println("\nReverse Order:");
         tree2.reverseOrderTraversal(tree2.getRoot());
         
-        ArithMediator am = new ArithMediator(tree2.getRoot());
+        
+        IBinaryTree tree3 = new BinaryTree();
+        tree3.setRoot(new Node("+"));
+        tree3.getRoot().setLeft(new Node("2"));
+        tree3.getRoot().setRight(new Node("3"));
+        
+        NodeTraversal nt = new NodeTraversal();
+        INode result = nt.whatsInside(tree3.getRoot());
+        System.out.println("result is " + result.getValue());
 	}
 
 }

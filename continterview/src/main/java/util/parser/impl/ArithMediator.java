@@ -3,13 +3,15 @@ package util.parser.impl;
 import domain.ArithOperator;
 import domain.iface.INode;
 import util.parser.iface.IArithMediator;
+import util.parser.iface.INodeTraversal;
 
-record ArithMediator(INode node) implements IArithMediator {
-	public int calculateNode(INode _node) {
-		switch(ArithOperator.valueOf(_node.getValue())) {
-			case PLUS -> plusInt(_node);
-			case MULTIPLY, MULTIPLICATION -> multiplyInt(_node);
-		}
+public record ArithMediator(INode node, INodeTraversal nt) implements IArithMediator {
+	static INodeTraversal nodeTrav;
+	static {
+		nodeTrav = new NodeTraversal();
+	}
+	public int calculateNode(INode node) {
+		INode retNode = nodeTrav.calcBottomOperatorNode(node);
 		return 0;
 	}
 	public boolean checkDone(INode _node) {
@@ -17,28 +19,5 @@ record ArithMediator(INode node) implements IArithMediator {
 	}
 	public INode forwardCalculation(INode _node) {
 		return null;
-	}
-	public int plusInt(INode _node) {
-		try {
-			return 
-					Integer.parseInt(_node.getLeft().getValue())
-					+
-					Integer.parseInt(_node.getRight().getValue());
-	
-	    } catch (NumberFormatException e) {
-	        return 0;
-	    }
-	}
-	
-	public int multiplyInt(INode _node) {
-		try {
-			return 
-					Integer.parseInt(_node.getLeft().getValue())
-					*
-					Integer.parseInt(_node.getRight().getValue());
-	
-	    } catch (NumberFormatException e) {
-	        return 0;
-	    }
 	}
 }

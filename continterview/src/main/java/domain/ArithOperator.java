@@ -1,8 +1,7 @@
 package domain;
 
 public enum ArithOperator {
-	OPENPARANTHESES("("),
-	CLOSEPARANTHESES(")"),
+	//OPENPARANTHESES("("), CLOSEPARANTHESES(")"),
 	MULTIPLY("*"),
 	TIMES("X"),
 	MULTIPLICATION("x"),

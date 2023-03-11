@@ -66,7 +66,6 @@ public class BinaryTree implements IBinaryTree {
         int h = height(node);
         int i;
         for (i = h; i >= 1; i--)
-        //THE ONLY LINE DIFFERENT FROM NORMAL LEVEL ORDER
         {
             printGivenLevel(node, i);
         }
