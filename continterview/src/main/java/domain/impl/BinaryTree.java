@@ -53,10 +53,57 @@ public class BinaryTree implements IBinaryTree {
         preOrder(node.getRight()); 
     } 
    // Wrappers for recursive functions 
-    public void postOrder_traversal()  {    
+    public void postOrderTraversal()  {    
         postOrder(root);  } 
-    public void inOrder_traversal() { 
+    public void inOrderTraversal() { 
         inOrder(root);   } 
-    public void preOrder_traversal() {
+    public void preOrderTraversal() {
         preOrder(root);  } 
+    
+    
+    public void reverseOrderTraversal(INode node)
+    {
+        int h = height(node);
+        int i;
+        for (i = h; i >= 1; i--)
+        //THE ONLY LINE DIFFERENT FROM NORMAL LEVEL ORDER
+        {
+            printGivenLevel(node, i);
+        }
+    }
+  
+    /* Print nodes at a given level */
+    private void printGivenLevel(INode node, int level)
+    {
+        if (node == null)
+            return;
+        if (level == 1)
+            System.out.print(node.getValue() + " ");
+        else if (level > 1)
+        {
+            printGivenLevel(node.getLeft(), level - 1);
+            printGivenLevel(node.getRight(), level - 1);
+        }
+    }
+  
+    /* Compute the "height" of a tree -- the number of
+     nodes along the longest path from the root node
+     down to the farthest leaf node.*/
+    private int height(INode node)
+    {
+        if (node == null)
+            return 0;
+        else
+        {
+            /* compute the height of each subtree */
+            int lheight = height(node.getLeft());
+            int rheight = height(node.getRight());
+  
+            /* use the larger one */
+            if (lheight > rheight)
+                return (lheight + 1);
+            else
+                return (rheight + 1);
+        }
+    }
 }

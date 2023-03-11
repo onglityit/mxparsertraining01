@@ -9,7 +9,8 @@ public interface IBinaryTree {
 	void postOrder(INode root);
 	void inOrder(INode root);
     void preOrder(INode root);
-    void postOrder_traversal(); 
-    void inOrder_traversal();
-    void preOrder_traversal();
+    void postOrderTraversal(); 
+    void inOrderTraversal();
+    void preOrderTraversal();
+    void reverseOrderTraversal(INode node);
 }
