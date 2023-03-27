@@ -1,5 +1,7 @@
 package util.parser.impl;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import domain.ArithOperator;
 import domain.iface.INode;
 import domain.impl.Node;
@@ -9,6 +11,33 @@ public class NodeTraversal implements INodeTraversal{
 	public INode calcBottomOperatorNode(INode _node) {
 		//calculate and get the integer result
 		int result = calculateSingleNode(_node);
+		//replace the node with result
+		
+		INode parent = _node.getParent();
+		if(parent != null) {
+			parent.setValue(String.valueOf(result));
+			parent.setLeft(null);
+			parent.setRight(null);
+			return parent;
+		}
+		return new Node(String.valueOf(result));
+	}
+	
+
+	public INode calcRecursively(INode _node) {
+		if(_node.getLeft() != null && 
+			!NumberUtils.isCreatable((_node.getLeft().getValue()))){
+			//int leftResult = Integer.parseInt(calcRecursively(_node.getLeft()).getValue());
+			_node.setLeft(new Node(calcRecursively(_node.getLeft()).getValue()));
+		}
+		if(_node.getRight() != null && 
+			!NumberUtils.isCreatable((_node.getRight().getValue()))){
+			_node.setRight(new Node(calcRecursively(_node.getRight()).getValue()));
+		}
+		int result = NumberUtils.isCreatable(_node.getValue()) ?
+				Integer.parseInt(_node.getValue())
+				:
+				calculateSingleNode(_node);
 		//replace the node with result
 		
 		INode parent = _node.getParent();
@@ -37,14 +66,15 @@ public class NodeTraversal implements INodeTraversal{
 		INode resNode;
 		int theHeight = height(node);
 		if(theHeight > 2) {
-			resNode = node;
-			resNode.setLeft(whatsInside(resNode.getLeft()));
-			resNode.setRight(whatsInside(resNode.getRight()));
+			resNode = calcRecursively(node);
+			
+			//return whatsInside(resNode);
 		}else if(theHeight == 2) {
 			resNode = calcBottomOperatorNode(node);
 		}
 		else {
-			resNode = new Node(node.getValue());
+			//resNode = new Node(node.getValue());
+			resNode = null;
 		}
         // 2 + 3 whats inside null 5 null
 		/*

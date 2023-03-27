@@ -8,6 +8,8 @@ public class HelloController {
 
 	@GetMapping("/hello")
 	public String hello() {
+		KotlinDataClass  kdc =new  KotlinDataClass();
+		kdc.value = "1";
 		return "helowo";
 	}
 }
